@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
         messages: [{role: "user", content: "你好"}],
         stream: true,
     });
-    setResStatus(event, response.status, response.statusText);
+    setResStatus(event, chatCompletion.status, chatCompletion.statusText);
     return chatCompletion.data;
 })
 
