@@ -47,20 +47,19 @@ const handle = async () => {
   }
 }
 
-const handleOpenAi =()=>{
-   new OpenAI('chat',
+const handleOpenAi =async ()=>{
+  await OpenAI('chat', {
+    model: "gpt-3.5-turbo",
+    messages: [
       {
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: "你好",
-          },
-        ],
-      }, {
-        apiKey: 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
-        mode: "raw"
-      })
+        role: "user",
+        content: "你好",
+      },
+    ],
+  }, {
+    apiKey: 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
+    mode: "raw"
+  })
 }
 
 </script>
