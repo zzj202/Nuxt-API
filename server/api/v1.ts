@@ -1,18 +1,18 @@
+
+import {Configuration, CreateChatCompletionRequest, OpenAIApi} from "openai";
+const runtimeConfig =useRuntimeConfig()
 export default defineEventHandler(async (event) => {
-    const res = await fetch('https://gpt.orionyoung.com/api/openai/v1/chat/completions', {
-        method: 'POST',
-        body: {
-            messages: [
-                {
-                    "role": "user",
-                    "content": "你好"
-                }
-            ],
-            model: "gpt-3.5-turbo",
-        },
-        headers: {
-            Authorization: 'Bearer ak-orionyoung'
-        }
-    })
-    return res
+    const headers =getHeaders(event)
+    const body = (await readBody(event)) as CreateChatCompletionRequest;
+
+
+    const configuration = new Configuration({
+        apiKey: runtimeConfig.apiSecret
+    });
+    const openai = new OpenAIApi(configuration);
+    const chatCompletion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: "你好"}],
+    });
+    return chatCompletion.data;
 })
