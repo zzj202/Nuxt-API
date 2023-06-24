@@ -15,6 +15,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "ai": "^2.1.8",
     "openai": "^3.3.0",
     "openai-streams": "^6.1.0"
   }

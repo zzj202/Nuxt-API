@@ -4,6 +4,7 @@
     <button @click="handleV2">v2</button>
     <button @click="handleV3">v3</button>
     <button @click="handleCompletions">completions</button>
+    <button @click="handleM1">m1</button>
   </div>
 
 
@@ -28,6 +29,12 @@ const handleV3 = () => {
 }
 const handleCompletions=()=>{
   $fetch('/api/completions',{
+    method: 'POST',
+  })
+}
+
+const handleM1 =()=>{
+  $fetch('/api/m1',{
     method: 'POST',
   })
 }
