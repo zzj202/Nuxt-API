@@ -16,5 +16,5 @@ export default defineEventHandler(async (event) => {
         apiKey: runtimeConfig.apiSecret,
         mode: "raw"
     })
-    return chatCompletion.data;
+    return stream;
 })
