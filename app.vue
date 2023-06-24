@@ -15,7 +15,7 @@ const runtimeConfig = useRuntimeConfig()
 const content = ref("")
 const handle = async () => {
   console.log(runtimeConfig.public.apiBase)
-  const {status, statusText, body} = await $fetch('https://api.openai.com/v1/chat/completions', {
+  const res = await $fetch('https://api.openai.com/v1/chat/completions', {
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
@@ -31,19 +31,20 @@ const handle = async () => {
       stream: true,
     })
   })
-  console.log(status, statusText, body)
-  const reader = body?.getReader();
-  const textDecoder = new TextDecoder();
-  while (1) {
-    const {done, value} = await reader.read()
-    if (done) {
-      break;
-    }
-    console.log(value)
-    const str = textDecoder.decode(value)
-    console.log(str)
-    content.value += str
-  }
+  console.log(res)
+  // console.log(status, statusText, body)
+  // const reader = body?.getReader();
+  // const textDecoder = new TextDecoder();
+  // while (1) {
+  //   const {done, value} = await reader.read()
+  //   if (done) {
+  //     break;
+  //   }
+  //   console.log(value)
+  //   const str = textDecoder.decode(value)
+  //   console.log(str)
+  //   content.value += str
+  // }
 }
 
 
