@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
     const axiosRequestConfig: AxiosRequestConfig = {
         responseType: "stream",
-        timeout: 1000 * 20,
+            timeout: 10000 * 20,
         timeoutErrorMessage: "**Network connection timed out. Please try again**",
     };
     const axiosInstance = axios.create(axiosRequestConfig);
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
 
     const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: "写一篇关于如何使用 OpenAI API 的文章"}],
+        messages: [{role: "user", content: "您好"}],
         stream: true,
     }, {
         headers: {
