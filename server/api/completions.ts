@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
     const axiosRequestConfig: AxiosRequestConfig = {
         responseType: "stream",
-            timeout: 10000 * 20,
+        timeout: 1000 * 20,
         timeoutErrorMessage: "**Network connection timed out. Please try again**",
     };
     const axiosInstance = axios.create(axiosRequestConfig);
