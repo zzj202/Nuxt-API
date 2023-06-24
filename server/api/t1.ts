@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    const res = await fetch('https://gpt.orionyoung.com/api/openai/v1/chat/completions', {
         method: 'POST',
         body: {
             messages: [
@@ -12,8 +12,11 @@ export default defineEventHandler(async (event) => {
             stream: true,
         },
         headers: {
-            Authorization: 'Bearer ak-orionyoung',
+            Authorization: 'Bearer ak-orionyoung'
         }
     })
-    return res
+    console.log(res)
+    return {
+        res: res,
+    }
 })
