@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     const openai = new OpenAIApi(configuration);
     const chatCompletion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: "写一篇关于如何使用 OpenAI API 的文章"}],
+        messages: [{role: "user", content: "你好"}],
         stream: true,
     });
     setResStatus(event, response.status, response.statusText);
