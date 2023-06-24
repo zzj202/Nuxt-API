@@ -48,7 +48,7 @@ const handle = async () => {
 }
 
 const handleOpenAi =()=>{
-  await new OpenAI('chat',
+   new OpenAI('chat',
       {
         model: "gpt-3.5-turbo",
         messages: [
