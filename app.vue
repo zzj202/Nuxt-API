@@ -31,10 +31,11 @@ const handle = async () => {
       stream: true,
     })
   })
+  console.log(res)
   console.log(res.data)
   console.log(res.body)
 
-  const reader = res.body?.getReader();
+  const reader = res?.getReader();
   const textDecoder = new TextDecoder();
   while (1) {
     const {done, value} = await reader.read()
