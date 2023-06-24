@@ -8,7 +8,7 @@ import {
 } from "openai";
 import {logger} from "@nuxt/kit";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { aesCrypto } from "~/server/api/crypto.post";
+
 
 export default defineEventHandler(async (event) => {
     const headers = getHeaders(event)
@@ -58,25 +58,6 @@ function createOpenAIConfiguration(
 ) {
     const useEnv = runtimeConfig.public.useEnv === "yes";
 
-    const apiType = useEnv
-        ? runtimeConfig.public.apiType
-        : (headers["x-api-type"] as ApiType);
-    const apiKey = useEnv
-        ? runtimeConfig.apiKey
-        : aesCrypto({ message: headers["x-cipher-api-key"]!, type: "de" });
-    const apiHost = useEnv ? runtimeConfig.apiHost : headers["x-api-host"];
-    const azureApiVersion = useEnv
-        ? runtimeConfig.azureApiVersion
-        : headers["x-azure-api-version"];
-    const azureGpt35DeploymentId = useEnv
-        ? runtimeConfig.azureGpt35DeploymentId
-        : headers["x-azure-gpt35-deployment-id"]!;
-    const azureGpt4DeploymentId = useEnv
-        ? runtimeConfig.azureGpt4DeploymentId
-        : headers["x-azure-gpt4-deployment-id"]!;
-    const azureDalleDeploymentId = useEnv
-        ? runtimeConfig.azureDalleDeploymentId
-        : headers["x-azure-dalle-deployment-id"]!;
 
     // Identify the model ID of the Azure OpenAI Service from the OpenAI model name
     let azureDeploymentId = "";
