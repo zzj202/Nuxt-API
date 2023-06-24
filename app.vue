@@ -31,10 +31,10 @@ const handle =async () => {
     if (done) {
       break;
     }
+    console.log(value)
     const str = textDecoder.decode(value)
-    let tmp =JSON.parse(str).data
-    console.log(tmp)
-    content.value +=tmp.choices[0].delta.content
+    console.log(str)
+    content.value += str
   }
 }
 
