@@ -13,6 +13,7 @@ export default defineEventHandler(async (event) => {
     const chatCompletion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{role: "user", content: "你好"}],
+        stream: true,
     });
     return chatCompletion.data;
 })
