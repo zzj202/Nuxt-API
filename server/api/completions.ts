@@ -13,10 +13,24 @@ const runtimeConfig =useRuntimeConfig()
 export default defineEventHandler(async (event) => {
     const headers = getHeaders(event)
     const body = (await readBody(event)) as CreateChatCompletionRequest;
-    const response = await createChatCompletion(headers, body);
+
+    const configuration = new Configuration({
+        apiKey: runtimeConfig.apiSecret
+    })
+    const axiosInstance = createAxiosInstance();
+    const openai = new OpenAIApi(configuration,undefined,axiosInstance);
+    const response = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: "写一篇关于如何使用 OpenAI API 的文章"}],
+        stream: true,
+    });
     setResStatus(event, response.status, response.statusText);
     return response.data;
 })
+
+
+
+
 
 
 async function createChatCompletion(
