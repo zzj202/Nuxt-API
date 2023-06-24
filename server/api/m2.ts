@@ -40,7 +40,6 @@ export default defineEventHandler(async (event) => {
                 read()
             })
         }
-
         read()
     })
 
