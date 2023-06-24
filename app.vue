@@ -3,20 +3,19 @@
     {{ content }}
   </div>
   <button @click="handle">处理</button>
-  <button @click="handleOpenAi">处理AI</button>
 
 </template>
 
 
 <script setup lang="ts">
 
-import {OpenAI} from "openai-streams";
+
 
 const runtimeConfig = useRuntimeConfig()
 const content = ref("")
 const handle = async () => {
   console.log(runtimeConfig.public.apiBase)
-  const {status, statusText, body} = await fetch('https://api.openai.com/v1/chat/completions', {
+  const {status, statusText, body} = await $fetch('https://api.openai.com/v1/chat/completions', {
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
@@ -47,19 +46,5 @@ const handle = async () => {
   }
 }
 
-const handleOpenAi =async ()=>{
-  await OpenAI('chat', {
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "user",
-        content: "你好",
-      },
-    ],
-  }, {
-    apiKey: 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
-    mode: "raw"
-  })
-}
 
 </script>
