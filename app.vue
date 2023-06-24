@@ -11,10 +11,11 @@
 const runtimeConfig =useRuntimeConfig()
 const content= ref("")
 const handle =async () => {
+  console.log(runtimeConfig.public.apiBase)
   const { status, statusText, body } = await fetch('https://api.openai.com/v1/chat/completions', {
     method:'post',
     headers:{
-      'Authorization': runtimeConfig.public.apiBase
+      'Authorization': 'Bearer ' + runtimeConfig.public.apiBase,
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
