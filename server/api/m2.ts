@@ -8,6 +8,7 @@ import {
 } from "openai";
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {OpenAIStream, streamToResponse} from 'ai'
+import {OpenAI} from "openai-streams";
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -15,23 +16,18 @@ export default defineEventHandler(async (event) => {
     // const headers = getHeaders(event)
     // const body = (await readBody(event)) as CreateChatCompletionRequest;
 
-
-    const config = new Configuration({
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        apiKey: runtimeConfig.apiSecret
-    })
-    const openai = new OpenAIApi(config)
-    // const { messages } = await readBody(event)
-    const response = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
-        stream: true,
-        messages: [{role: "user", content: "你好"}],
+    const stream = await OpenAI('chat', {
+        model: "gpt-3.5-turbo",
+        messages: [
+            {
+                role: "user",
+                content: "你好",
+            },
+        ],
     }, {
-        headers: {
-            'Authorization': 'Bearer ' + runtimeConfig.apiSecret,
-        }
+        apiKey: runtimeConfig.apiSecret,
+        mode: "raw"
     })
-    const stream = OpenAIStream(response)
     const reader = stream.getReader()
     return new Promise((resolve, reject) => {
         function read() {
@@ -44,6 +40,7 @@ export default defineEventHandler(async (event) => {
                 read()
             })
         }
+
         read()
     })
 
