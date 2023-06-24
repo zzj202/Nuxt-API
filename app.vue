@@ -10,7 +10,7 @@
 
 const content= ref("")
 const handle =async () => {
-  const { status, statusText, body } = await fetch('/api/v1', {
+  const { status, statusText, body } = await fetch('/api/completions', {
     method:'post',
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
