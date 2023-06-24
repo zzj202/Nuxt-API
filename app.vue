@@ -48,7 +48,7 @@ const handle = async () => {
 }
 
 const handleOpenAi =()=>{
-  const stream = await new OpenAI('chat',
+  await new OpenAI('chat',
       {
         model: "gpt-3.5-turbo",
         messages: [
@@ -61,7 +61,6 @@ const handleOpenAi =()=>{
         apiKey: 'sk-69T6IRXe1xLXzO2t' + 'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
         mode: "raw"
       })
-  console.log(stream)
 }
 
 </script>
