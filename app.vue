@@ -17,18 +17,16 @@ const handle =async () => {
     headers:{
       'Authorization': 'Bearer ' + 'sk-69T6IRXe1xLXzO2t'+'Onl2T3BlbkFJO02e3c5YoTxeiQt66fAu',
     },
-    body:{
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: '你好',
-          },
-        ],
-
-      })
-    }
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: '你好',
+        },
+      ],
+      stream: true,
+    })
   })
   console.log(status, statusText,body)
   const reader = body?.getReader();
