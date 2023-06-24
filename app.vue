@@ -32,7 +32,9 @@ const handle =async () => {
       break;
     }
     const str = textDecoder.decode(value)
-    content.value += str
+    let tmp =JSON.parse(str).data
+    console.log(tmp)
+    content.value +=tmp.choices[0].delta.content
   }
 }
 
