@@ -7,29 +7,36 @@ import {
     OpenAIApi
 } from "openai";
 
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-const runtimeConfig =useRuntimeConfig()
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+
+const runtimeConfig = useRuntimeConfig()
 
 export default defineEventHandler(async (event) => {
     // const headers = getHeaders(event)
     // const body = (await readBody(event)) as CreateChatCompletionRequest;
 
-    const axiosInstance = createAxiosInstance();
+    const axiosRequestConfig: AxiosRequestConfig = {
+        responseType: "stream",
+        timeout: 1000 * 20,
+        timeoutErrorMessage: "**Network connection timed out. Please try again**",
+    };
+    const axiosInstance = axios.create(axiosRequestConfig);
     const openai = new OpenAIApi({
         apiKey: runtimeConfig.apiSecret
-    },undefined,axiosInstance);
+    }, undefined, axiosInstance);
+
     const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{role: "user", content: "写一篇关于如何使用 OpenAI API 的文章"}],
         stream: true,
+    }, {
+        headers: {
+            'Authorization': 'Bearer ' + runtimeConfig.apiSecret,
+        }
     });
     setResStatus(event, response.status, response.statusText);
     return response.data;
 })
-
-
-
-
 
 
 async function createChatCompletion(
@@ -94,7 +101,7 @@ function createOpenAIConfiguration(
             ? {
                 basePath: `${apiHost}/openai/deployments/${azureDeploymentId}`,
                 baseOptions: {
-                    headers: { "api-key": apiKey },
+                    headers: {"api-key": apiKey},
                     params: {
                         "api-version": azureApiVersion,
                     },
@@ -114,12 +121,6 @@ function createAxiosInstance() {
         responseType: "stream",
         timeout: 1000 * 20,
         timeoutErrorMessage: "**Network connection timed out. Please try again**",
-        // 使用代理，配置参考 https://axios-http.com/docs/req_config
-        // proxy: {
-        //   protocol: "http",
-        //   host: "127.0.0.1",
-        //   port: 7890,
-        // },
     };
 
     function onRequest(config: AxiosRequestConfig) {
