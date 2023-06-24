@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
         messages: [
             {
                 role: "user",
-                content: "你好",
+                content: "请写一篇800字作文，题目是：我的家乡",
             },
         ],
     }, {
