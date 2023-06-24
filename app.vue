@@ -31,20 +31,21 @@ const handle = async () => {
       stream: true,
     })
   })
-  console.log(res)
-  // console.log(status, statusText, body)
-  // const reader = body?.getReader();
-  // const textDecoder = new TextDecoder();
-  // while (1) {
-  //   const {done, value} = await reader.read()
-  //   if (done) {
-  //     break;
-  //   }
-  //   console.log(value)
-  //   const str = textDecoder.decode(value)
-  //   console.log(str)
-  //   content.value += str
-  // }
+  console.log(res.data)
+  console.log(res.body)
+
+  const reader = res.body?.getReader();
+  const textDecoder = new TextDecoder();
+  while (1) {
+    const {done, value} = await reader.read()
+    if (done) {
+      break;
+    }
+    console.log(value)
+    const str = textDecoder.decode(value)
+    console.log(str)
+    content.value += str
+  }
 }
 
 
