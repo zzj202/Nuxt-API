@@ -8,7 +8,7 @@ import {
 } from "openai";
 import {logger} from "@nuxt/kit";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
+const runtimeConfig =useRuntimeConfig()
 
 export default defineEventHandler(async (event) => {
     const headers = getHeaders(event)
