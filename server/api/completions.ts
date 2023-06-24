@@ -6,7 +6,7 @@ import {
     CreateImageRequest,
     OpenAIApi
 } from "openai";
-import {logger} from "@nuxt/kit";
+
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 const runtimeConfig =useRuntimeConfig()
 
@@ -123,28 +123,20 @@ function createAxiosInstance() {
     };
 
     function onRequest(config: AxiosRequestConfig) {
-        logger("onRequest", `[${config.method?.toUpperCase()}]`, config.url);
         return config;
     }
 
     function onResponse(response: AxiosResponse) {
-        logger(
-            "onResponse",
-            `[${response.config.method?.toUpperCase()}]`,
-            response.config.url,
-            response.status,
-            response.statusText
-        );
         return response;
     }
 
     function onRequestError(error: any) {
-        logger("onRequestError", error);
+
         return error;
     }
 
     function onResponseError(error: any) {
-        logger("onResponseError", error);
+
         return error.response;
     }
 
