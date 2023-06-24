@@ -10,11 +10,10 @@ export default defineEventHandler(async (event) => {
                 role: "user",
                 content: "你好",
             },
-
         ],
     }, {
         apiKey: runtimeConfig.apiSecret,
         mode: "raw"
     })
-    return stream;
+    return sendStream(event, stream);
 })
