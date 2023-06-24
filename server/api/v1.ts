@@ -1,11 +1,7 @@
 
-import {Configuration, CreateChatCompletionRequest, OpenAIApi} from "openai";
+import {Configuration, OpenAIApi} from "openai";
 const runtimeConfig =useRuntimeConfig()
 export default defineEventHandler(async (event) => {
-    const headers =getHeaders(event)
-    const body = (await readBody(event)) as CreateChatCompletionRequest;
-
-
     const configuration = new Configuration({
         apiKey: runtimeConfig.apiSecret
     });
